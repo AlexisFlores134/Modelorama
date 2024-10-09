@@ -18,7 +18,6 @@ return new class extends Migration
             $table->UnsignedBigInteger('cantidad');
             $table->UnsignedBigInteger('tipo_id');
             $table->foreign('tipo_id')->references('id')->on('categorias')->onDelete('cascade');
-
             $table->timestamps();
         });
     }
