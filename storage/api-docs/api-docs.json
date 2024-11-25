@@ -1,0 +1,322 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de Modelorama",
+        "description": "API de Modelorama con CRUD",
+        "contact": {
+            "email": "af973848@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000"
+        }
+    ],
+    "paths": {
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "summary": "Iniciar sesión",
+                "description": "Inicia sesión para obtener un token Bearer que permita acceder a los recursos protegidos.",
+                "operationId": "7fe7085e1df995c6c2ee884a80eb30d6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "correo",
+                                    "contraseña",
+                                    "dispositivo"
+                                ],
+                                "properties": {
+                                    "correo": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "usuario@ejemplo.com"
+                                    },
+                                    "contraseña": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password"
+                                    },
+                                    "dispositivo": {
+                                        "type": "string",
+                                        "example": "Laptop"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Token generado con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "example": "eyJhbGciOiJIUzI1NiIsInR5..."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Credenciales inválidas"
+                    }
+                }
+            }
+        },
+        "/api/mercancias": {
+            "get": {
+                "tags": [
+                    "Mercancia"
+                ],
+                "summary": "Consultar todas las mercancias",
+                "description": "Retorna todas las mercancias",
+                "operationId": "886ec5da9de4cb649861e32ac95990d2",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa"
+                    },
+                    "403": {
+                        "description": "No autorizado"
+                    },
+                    "404": {
+                        "description": "No se encontraron mercancias"
+                    },
+                    "405": {
+                        "description": "Método no permitido"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Mercancia"
+                ],
+                "summary": "Crear mercancia",
+                "description": "Crear una nueva mercancia",
+                "operationId": "95231618f50010c6b238c7f632e0af24",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "nombre",
+                                    "precio",
+                                    "cantidad",
+                                    "tipo_id"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Cerveza Modelo"
+                                    },
+                                    "precio": {
+                                        "type": "integer",
+                                        "example": "35"
+                                    },
+                                    "cantidad": {
+                                        "type": "integer",
+                                        "example": "100"
+                                    },
+                                    "tipo_id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Receta creada"
+                    },
+                    "403": {
+                        "description": "No autorizado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/mercancias/{mercancia}": {
+            "get": {
+                "tags": [
+                    "Mercancia"
+                ],
+                "summary": "Obtener mercancia por ID",
+                "description": "Retorna una mercancia con su id, nombre, precio, cantidad, tipo_id y autor",
+                "operationId": "f051209924f4414f2109fd1e46e31b3e",
+                "parameters": [
+                    {
+                        "name": "mercancia",
+                        "in": "path",
+                        "description": "ID de la mercancia",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mercancia"
+                    },
+                    "403": {
+                        "description": "No autorizado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Mercancia"
+                ],
+                "summary": "Actualizar mercancia",
+                "description": "Actualizar una mercancia por su ID",
+                "operationId": "54d206132f359edeb41c94fbc672c68f",
+                "parameters": [
+                    {
+                        "name": "mercancia",
+                        "in": "path",
+                        "description": "ID de la mercancia",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre",
+                                    "precio",
+                                    "cantidad",
+                                    "tipo_id"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Nombre de la mercancia"
+                                    },
+                                    "precio": {
+                                        "type": "integer",
+                                        "example": "Precio de la mercancia"
+                                    },
+                                    "cantidad": {
+                                        "type": "integer",
+                                        "example": "Cantidad de la mercancia"
+                                    },
+                                    "tipo_id": {
+                                        "type": "string",
+                                        "example": "Categoria"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Mercancia actualizada"
+                    },
+                    "403": {
+                        "description": "No autorizado"
+                    },
+                    "404": {
+                        "description": "Mercancia no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Mercancia"
+                ],
+                "summary": "Eliminar mercancia",
+                "description": "Elimina una mercancia por su ID.",
+                "operationId": "450fad0ba550e458bf5aa07ba3818c83",
+                "parameters": [
+                    {
+                        "name": "mercancia",
+                        "in": "path",
+                        "description": "ID de la mercancia",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Mercancia eliminada con éxito"
+                    },
+                    "403": {
+                        "description": "No autorizado"
+                    },
+                    "404": {
+                        "description": "Mercancia no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Login",
+            "description": "Login"
+        },
+        {
+            "name": "Mercancia",
+            "description": "Mercancia"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "bearer_token": {
+                "type": "apiKey",
+                "description": "Sanctum Bearer Token",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}

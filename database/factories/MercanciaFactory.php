@@ -21,6 +21,7 @@ class MercanciaFactory extends Factory
             'precio' => fake()->randomNumber(),
             'cantidad' => fake()->randomNumber(),
             'tipo_id'=> \App\Models\Categoria::all()->random()->id,
+            'user_id'=> \App\Models\User::all()->random()->id,
     ];
     }
 }

@@ -22,6 +22,7 @@ class MercanciaResource extends JsonResource
                 'precio' => $this->precio,
                 'cantidad' => $this->cantidad,
                 'tipo_id' => $this->tipo_id,
+                'autor' => $this->user->name,
             ]
         ];
     }
