@@ -33,12 +33,34 @@ class DatabaseSeeder extends Seeder
         User::factory(29)->create()->each(function ($user) {
             $user->assignRole('Usuario');
         });
-        Categoria::factory(10)->create();
-        Mercancia::factory(20)->create();
-        $mercancias = Mercancia::all();
-        $categorias = Categoria::all();
-        foreach ($mercancias as $mercancia) {
-            $mercancia->categorias()->attach($categorias->random(rand(2,4)));
+         // Crear categorías específicas
+         $categorias = [
+            'Modelo',
+            'Victoria',
+            'Corona',
+        ];
+        // Opciones de nombres aleatorios para las mercancías
+        $nombresMercancias = [
+            'Cerveza de 355ml',
+            'Caguama',
+            'Six pack',
+            'Cerveza lata',
+        ];
+
+        foreach ($categorias as $categoriaNombre) {
+            $categoria = Categoria::create(['tipo' => $categoriaNombre]);
+
+            // Crear 8 mercancías para cada categoría
+            for ($i = 1; $i <= 8; $i++) {
+                Mercancia::create([
+                    'nombre' => fake()->randomElement($nombresMercancias). " " . $categoria->tipo, // Nombre aleatorio + categoría
+                    'precio' => rand(30, 100), // Precio entre 20 y 100
+                    'cantidad' => rand(10, 100), // Cantidad entre 10 y 50
+                    'tipo_id' => $categoria->id, // ID de la categoría actual
+                    'user_id' => rand(1,2), // Puedes cambiar el ID del usuario a uno específico
+                ]);
+            }
         }
+        
     }
 }
