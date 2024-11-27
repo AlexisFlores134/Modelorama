@@ -26,5 +26,10 @@ class RolSeeder extends Seeder
         Permission::create(['name'=> 'Editar mercancias'])->syncRoles([$administrador, $editor]);
         Permission::create(['name'=> 'Eliminar mercancias'])->syncRoles([$administrador]);
         Permission::create(['name'=> 'Ver mercancias'])->syncRoles([$administrador, $editor, $usuario]);
+
+        Permission::create(['name' => 'Crear categorias'])->syncRoles([$administrador, $editor]);
+        Permission::create(['name'=> 'Editar categorias'])->syncRoles([$administrador, $editor]);
+        Permission::create(['name'=> 'Eliminar categorias'])->syncRoles([$administrador]);
+        Permission::create(['name'=> 'Ver categorias'])->syncRoles([$administrador, $editor, $usuario]);
     }
 }

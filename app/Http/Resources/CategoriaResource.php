@@ -14,14 +14,15 @@ class CategoriaResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return[
-            'id'=>$this->id,
-            'atributos' => [
-                'nombre' => $this->tipo,
-            ],
-            'relaciones' => [
-                'mercancias' => MercanciaResource::collection($this->categorias),
-            ],
+        return [
+           'id' => $this->id,
+           'nombre' => $this->tipo,
+           'mercancias' => $this->mercancias->map(function ($mercancia) {
+                return [
+                    'nombre' => $mercancia->nombre,
+                    'cantidad' => $mercancia->cantidad,
+                ];
+            }),
         ];
     }
 }

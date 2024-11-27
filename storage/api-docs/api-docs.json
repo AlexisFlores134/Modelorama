@@ -14,6 +14,186 @@
         }
     ],
     "paths": {
+        "/api/categorias": {
+            "get": {
+                "tags": [
+                    "Categoría"
+                ],
+                "summary": "Consultar todas las categorías",
+                "description": "Retorna todas las categorías",
+                "operationId": "684188b8d25abcad5e1c8a786226c02b",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa"
+                    },
+                    "403": {
+                        "description": "No autorizado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Categoría"
+                ],
+                "summary": "Crear categoría",
+                "description": "Crear una nueva categoría",
+                "operationId": "240f085d72cd493a2f869e93edc2c132",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "tipo"
+                                ],
+                                "properties": {
+                                    "tipo": {
+                                        "type": "string",
+                                        "example": "Smirnoff"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Categoría creada"
+                    },
+                    "403": {
+                        "description": "No autorizado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/categorias/{categoria}": {
+            "get": {
+                "tags": [
+                    "Categoría"
+                ],
+                "summary": "Consultar categoría por ID",
+                "description": "Obtiene los detalles de una categoría específica",
+                "operationId": "6cf1b8876b76a2723e3f0eb2fc16d33d",
+                "parameters": [
+                    {
+                        "name": "categoria",
+                        "in": "path",
+                        "description": "ID de la categoría",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Categoría encontrada"
+                    },
+                    "404": {
+                        "description": "Categoría no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Categoría"
+                ],
+                "summary": "Actualizar categoría",
+                "description": "Actualizar el campo tipo de una categoría",
+                "operationId": "98bd716d45e6bc89f3e5c7ef9d1a3683",
+                "parameters": [
+                    {
+                        "name": "categoria",
+                        "in": "path",
+                        "description": "ID de la categoría",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "tipo"
+                                ],
+                                "properties": {
+                                    "tipo": {
+                                        "type": "string",
+                                        "example": "Categoría Actualizada"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Categoría actualizada"
+                    },
+                    "404": {
+                        "description": "Categoría no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Categoría"
+                ],
+                "summary": "Eliminar categoría",
+                "description": "Elimina una categoría específica por su ID",
+                "operationId": "f0727d51c867551dadd84422b3aaec77",
+                "parameters": [
+                    {
+                        "name": "categoria",
+                        "in": "path",
+                        "description": "ID de la categoría",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Categoría eliminada con éxito"
+                    },
+                    "404": {
+                        "description": "Categoría no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
         "/api/login": {
             "post": {
                 "tags": [
@@ -300,6 +480,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Categoría",
+            "description": "Categoría"
+        },
         {
             "name": "Login",
             "description": "Login"
