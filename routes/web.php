@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return ['Laravel' => app()->version()];
 });
-Route::get('/api/documentation', function () {
+Route::get('/api/docs', function () {
     return view('l5-swagger::swagger-ui');
 });
 
