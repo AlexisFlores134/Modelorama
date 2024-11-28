@@ -11,7 +11,7 @@ namespace App\Http\Controllers;
  *     )
  * )
  * @OA\Server(
- *    url="https://modelorama-production.up.railway.app/api",
+ *    url="https://modelorama-production.up.railway.app/",
  * )
  */
 abstract class Controller
