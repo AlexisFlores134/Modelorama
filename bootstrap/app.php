@@ -21,7 +21,9 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         $middleware->validateCsrfTokens(except: [
             'http://localhost:8000/*',
-            'https://modelorama-production.up.railway.app/*'
+            'https://modelorama-production.up.railway.app/*',
+            'api/*',  // Añade esta línea
+            'auth/*'  // Y esta línea
 
         ]);
 
