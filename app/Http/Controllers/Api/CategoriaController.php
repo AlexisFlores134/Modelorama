@@ -143,7 +143,7 @@ class CategoriaController extends Controller
      */
     public function update(UpdateCategoriaRequest $request, Categoria $categoria)
     {
-        $this->authorize('Editar mercancias');
+        
         $this->authorize('update', $categoria);
 
         // Actualiza solo los datos de la categoría
