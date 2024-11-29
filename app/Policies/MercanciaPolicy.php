@@ -12,7 +12,7 @@ class MercanciaPolicy
      */
     public function update(User $user, Mercancia $mercancia)
     {
-        return $user->id === $mercancia->user_id;
+        return $user->can('Editar mercancias');
     }
     public function delete(User $user, Mercancia $mercancia){
         return $user->id === $mercancia->user_id;
