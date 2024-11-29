@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LoginController extends Controller
 {
-        /**
+    /**
      * @OA\Post(
      *    path="/api/login",
      *    summary="Iniciar sesión",
